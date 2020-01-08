@@ -16,6 +16,8 @@ export default {
     }
   },
   computed: {
+    // 想要视图更新vuex中的的数据，就需要用计算属性监听this.$store.state.count这个依赖项的变化
+    // 为什么一定要计算属性呢？从下面的watch中我们可以看出，data中的数据，需要初始化的，
     countadd () {
       return this.$store.state.count
     }
