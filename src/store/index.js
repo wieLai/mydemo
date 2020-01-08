@@ -3,29 +3,29 @@ import vuex from 'vuex'
 Vue.use(vuex)
 
 export default new vuex.Store({
+  // 需求就是需要在组件中（view）只筛选出我需要的
   state: {
-    count: 10
+    list: ['p', 'img', 'h1', 'h2', 'div']
   },
-  // getters相当于计算属性,既然说是像计算属性，那我试试改变state中的数据，也就是改变他的依赖项看看
-  // 结果：依赖改变，他就改变
-  // 下面是没有传参的方式,有没有传参，决定了了这个计算属性的写法，和用法
+
   getters: {
-    // addcount (state) {
-    //   return state.count + '我是'
+    // 没有传参的方式
+    // filterDome (state) {
+    //   return state.list.filter((item) => {
+    //     return item === 'img'
+    //   })
     // }
-    // addcount: state => state.count + '我是'
-    //
-    // 传参
-    addcount (state) {
-      return (num) => {
-        return state.count + num
-      }
-    }
-  },
-  mutations: {
-    addcount (state) {
-      state.count++
-    }
+    // filterDome: state => state.list.filter(v => v === 'img')
+
+    // 下面是传参的方式,通过返回一个函数让组件直接调用
+    // filterDome (state) {
+    //   return (params) => {
+    //     return state.list.filter(item => {
+    //       return item === params
+    //     })
+    //   }
+    // }
+    filterDome: state => params => state.list.filter(item => item === params)
   }
 
 })

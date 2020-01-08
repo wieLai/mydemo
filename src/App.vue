@@ -1,8 +1,8 @@
 <template>
   <div class="app">
-<span>{{count}}</span><br>
-<!-- <span>{{addcount}}</span> -->
-<input type="button" value="点击我加加" @click="handleClick">
+<ul>
+  <li v-for="(item,index) in listDome" :key="index">{{item}}</li>
+</ul>
   </div>
 </template>
 
@@ -10,30 +10,25 @@
 export default {
   data () {
     return {
-      // count: this.$store.state.count
-      // vuex中的计算属性，就是当计算属性那样来用就行，不能用函数调用的形式，this.$store.getters.addcount()
-      // 如果用函数调用的形式，就是要用另外一种写法了的
-      // 没有传参的用法
-      // count: this.$store.getters.addcount
-      // 传参的用法
-      count: this.$store.getters.addcount(99)
+      // 如果多个组件都是需要做这样的筛选操作的话，就是重复的代码了，我们就需要在vuex中直接做操作
+      // listDome: this.$store.state.list.filter((item, index) => {
+      //   return item === 'img'
+      // })
+      // 没有传参的方式
+      // listDome: this.$store.getters.filterDome
+      // 传参的方式,就需要像函数调用那样了
+      // listDome: this.$store.getters.filterDome('p')
+      listDome: this.$store.getters.filterDome('h1')
     }
   },
   computed: {
-    // addcount () {
-    //   return this.$store.state.count
-    // }
-    addcount () {
-      return this.$store.getters.addcount
-    }
+
   },
   methods: {
-    handleClick () {
-      this.$store.commit('addcount')
-    }
+
   },
   mounted () {
-    // console.log(this.$store.getters.addcount)
+
   }
 }
 </script>
