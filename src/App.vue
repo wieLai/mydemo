@@ -1,6 +1,10 @@
 <template>
   <div class="app">
+    <h1>我们可以看一下，</h1>
 <span>{{count}}</span>
+<hr>
+<span>{{countadd}}</span>
+<input type="button" value="点击我" @click="handleCilck">
   </div>
 </template>
 
@@ -9,6 +13,36 @@ export default {
   data () {
     return {
       count: this.$store.state.count
+    }
+  },
+  computed: {
+    countadd () {
+      return this.$store.state.count
+    }
+  },
+  watch: {
+    // 监听data中的count属性
+    count () {
+      console.log('如果这里输出了,就证明数据已经改变，但是就是没有更新到视图')
+      console.log('没有输出就是data中的数据没有发生变化，不仅仅是视图没有变化，老师说data中的数据需要初始化')
+      console.log(this.count)
+    },
+    // 监听vuex中的数据   监听对象中的属性值
+    '$store.state.count' () {
+      console.log('vuex中的数据发生了变化')
+      console.log(this.$store.state.count)
+    }
+    // 监听一个对象
+    // $store: {
+    //   handler (newV, oldV) {
+    //     console.log(newV.name, oldV.name)
+    //   },
+    //   deep: true
+    // }
+  },
+  methods: {
+    handleCilck () {
+      this.$store.commit('updatedCount')
     }
   },
   mounted () {
