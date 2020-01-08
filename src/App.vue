@@ -1,11 +1,22 @@
 <template>
-  <div id="app">
-<div class="app">
-  <router-view></router-view>
-</div>
+  <div class="app">
+<span>{{count}}</span>
   </div>
 </template>
 
-<style lang="less">
+<script>
+export default {
+  data () {
+    return {
+      count: this.$store.state.count
+    }
+  },
+  mounted () {
+
+  }
+}
+</script>
+
+<style lang="less" scoped>
 
 </style>
