@@ -45,10 +45,15 @@ export default {
   methods: {
     handleCilck () {
       this.$store.commit('updatedCount')
+    },
+    handleAction () {
+      setTimeout(() => {
+        this.$store.dispatch('updatedCount', 10)
+      }, 3000)
     }
   },
   mounted () {
-
+    this.handleAction()
   }
 }
 </script>
