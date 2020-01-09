@@ -3,26 +3,23 @@ import vuex from 'vuex'
 Vue.use(vuex)
 
 export default new vuex.Store({
-  // 需求就是需要在组件中（view）只筛选出我需要的
+
   state: {
     count: 10
   },
 
   mutations: {
-    addcount (state) {
-      state.count++
-    }
+    // 就例如我们这里有一大堆，组件需要同步操作state仓库的方法,如果再组件那边我们如果一个个的引入的话
+    // 那就太麻烦了,
+    updateCount1 (state) {
+      console.log(state.count)
+      state.count += 1 // 并不需要return
+    },
+    updateCount2: state => { state.count += 2 },
+    updateCount3: state => { state.count += 3 },
+    updateCount4: state => { state.count += 4 }
   },
   actions: {
-    // 普通用法
-    // addcount (context) {
-    //   // console.log(context)
-    //   context.commit('addcount')
-    // }
-    // context是他本身就传过来的一个对象，我们直接接收并结构，就直接用就可以了
-    // addcount ({ commit }) {
-    //   // console.log(context)
-    //   commit('addcount')
-    // }
+
   }
 })
