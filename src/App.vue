@@ -1,12 +1,18 @@
 <template>
   <div class="app">
 <ul>
-  <li v-for="(item,index) in listDome" :key="index">{{item}}</li>
+  <!-- <li v-for="(item,index) in listDome" :key="index">{{item}}</li> -->
+
+  <li v-for="(item,index) in getlist1" :key="index">{{item}}</li><hr>
+  <li v-for="(item,index) in getlist2" :key="index">{{item}}</li><hr>
+  <li v-for="(item,index) in getlist3" :key="index">{{item}}</li><hr>
+  <li v-for="(item,index) in getlist4" :key="index">{{item}}</li>
 </ul>
   </div>
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 export default {
   data () {
     return {
@@ -22,7 +28,22 @@ export default {
     }
   },
   computed: {
+    //  普通用法就只能一个个地用了,
+    // getlist1 () {
+    //   return this.$store.getters.getlist1
+    // },
+    // getlist2 () {
+    //   return this.$store.getters.getlist2
+    // },
+    // getlist3 () {
+    //   return this.$store.getters.getlist3
+    // },
+    // getlist4 () {
+    //   return this.$store.getters.getlist4
+    // }
 
+    // mapGetters用法,并没有什么的特别，就是提供了一个方法让我们一次就把我们需要的可以一次搞过来
+    ...mapGetters(['getlist1', 'getlist2', 'getlist3', 'getlist4'])
   },
   methods: {
 
