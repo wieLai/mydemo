@@ -1,23 +1,18 @@
 <template>
   <div class="app">
-<h1>来看看mapMutations的使用吧，类似于mapgetters的，都是为了方便</h1>
-<span>{{count}}</span>
-<!-- <input type="button" value="点我啊1" @click="handleClick1">
-<input type="button" value="点我啊2" @click="handleClick2">
-<input type="button" value="点我啊3" @click="handleClick3">
-<input type="button" value="点我啊4" @click="handleClick4"> -->
-
-<!--注意：：： 名字需要和下面 mapMutations方法结构出来的一样了-->
-<!-- 但是还有一个，我就是还不知道这种方式怎么传参 -->
- <input type="button" value="点我啊1" @click="updateCount1">
-<input type="button" value="点我啊2" @click="updateCount2">
-<input type="button" value="点我啊3" @click="updateCount3">
-<input type="button" value="点我啊4" @click="updateCount4">
+<h1>来试试modules的用法，其实他就是有不同的模块的全局数据
+  （如果所以的全局数据都放在一个模块中，那那个模块也太臃肿了），
+  把不同的模块组合起来</h1>
+<!-- 先试试使用数据 -->
+<span>user模块的{{userCount}}</span> <hr>
+<span>cart模块的{{cartCount}}</span> <hr>
+<input type="button" value="点击我改变user模块中的数据" @click="handleuser">
+<input type="button" value="点击我改变cart模块中的数据" @click="handlecart">
   </div>
 </template>
 
 <script>
-import { mapMutations } from 'vuex'
+
 export default {
   data () {
     return {
@@ -25,32 +20,28 @@ export default {
     }
   },
   computed: {
-    count () {
-      return this.$store.state.count
+    // 使用的时候就是多加一层.
+    userCount () {
+      return this.$store.state.user.userCount
+    },
+    cartCount () {
+      return this.$store.state.cart.cartCount
     }
   },
   methods: {
-    // 普通用法，，，，一个个地写是不是太麻烦了
-    // handleClick1 () {
-    //   this.$store.commit('updateCount1')
-    // },
-    // handleClick2 () {
-    //   this.$store.commit('updateCount2')
-    // },
-    // handleClick3 () {
-    //   this.$store.commit('updateCount3')
-    // },
-    // handleClick4 () {
-    //   this.$store.commit('updateCount4')
-    // }
-
-    // mapMutations只是贴心地为我们提供了少功夫，但是要注意的就是，上面绑定是事件处理函数就需要和
-    // 下面结构出来的名字一样了
-    ...mapMutations(['updateCount1', 'updateCount2', 'updateCount3', 'updateCount4'])
-
+    // 改变user模块中的数据
+    handleuser () {
+      // 先要改变其中对应模块中的数据的时候，就可以像下面那样多加一层路径
+      this.$store.commit('user/adduserCount', 30)
+    },
+    // 改变cart模块中的数据
+    handlecart () {
+      this.$store.commit('cart/addcartCount', 50)
+    }
   },
   mounted () {
-
+    // 如果不知道他的层次，可以直接把this.$store打印出来看看
+    console.log(this.$store)
   }
 }
 </script>
