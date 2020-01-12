@@ -14,6 +14,10 @@ export default {
     }
   },
   mounted () {
+    // 平时用于测试可以用到
+    // let arr = Object.keys(String(new Array(100))) // 可以瞬间创建多个数组用于循环demo
+    // console.log(arr)
+
     // slice() 方法返回一个新的数组对象，这一对象是一个由
     // begin 和 end 决定的原数组的浅拷贝（包括 begin，不包括end）。原始数组不会被改变。
 
